@@ -36,21 +36,20 @@ export function Navbar() {
         <div
           className={`flex items-center justify-between rounded-2xl px-5 py-3 transition-all duration-500 ${
             scrolled
-              ? "navbar-glass shadow-card"
-              : "bg-white/70 backdrop-blur-sm border border-white/40"
+              ? "navbar-glass"
+              : "bg-[#181512]/60 backdrop-blur-md border border-[#E8A628]/15"
           }`}
         >
-          <Link to="/">
-            <Logo />
-          </Link>
+          <Link to="/"><Logo /></Link>
 
+          {/* Desktop nav */}
           <nav className="hidden items-center gap-1 lg:flex">
             {links.map((l) => (
               <Link
                 key={l.to}
                 to={l.to}
-                className="group relative rounded-md px-3 py-2 text-sm font-medium text-ink/75 transition-colors hover:text-gold"
-                activeProps={{ className: "text-gold font-semibold" }}
+                className="group relative rounded-md px-3 py-2 text-sm font-medium text-[#F0E8D8]/70 transition-colors hover:text-[#F5B800]"
+                activeProps={{ className: "text-[#F5B800] font-semibold" }}
                 activeOptions={{ exact: l.to === "/" }}
               >
                 {l.label}
@@ -62,29 +61,33 @@ export function Navbar() {
           <div className="hidden lg:block">
             <Link
               to="/menu"
-              className="group inline-flex items-center gap-2 rounded-full bg-gradient-gold px-5 py-2.5 text-sm font-semibold text-ink shadow-gold transition-all hover:scale-105 hover:shadow-[0_8px_24px_rgba(255,195,0,0.4)]"
+              className="group inline-flex items-center gap-2 rounded-full bg-gradient-gold px-5 py-2.5 text-sm font-semibold text-[#181512] shadow-gold transition-all hover:scale-105 hover:shadow-[0_8px_28px_rgba(245,184,0,0.5)]"
             >
               <ShoppingBag className="h-4 w-4" />
               Order Now
             </Link>
           </div>
 
+          {/* Mobile hamburger */}
           <button
             onClick={() => setOpen((v) => !v)}
             aria-label="Menu"
-            className="grid h-10 w-10 place-items-center rounded-lg border border-black/08 bg-white shadow-card lg:hidden"
+            className="grid h-10 w-10 place-items-center rounded-lg glass lg:hidden"
           >
-            {open ? <X className="h-5 w-5 text-ink" /> : <Menu className="h-5 w-5 text-ink" />}
+            {open
+              ? <X className="h-5 w-5 text-[#F0E8D8]" />
+              : <Menu className="h-5 w-5 text-[#F0E8D8]" />}
           </button>
         </div>
 
+        {/* Mobile drawer */}
         <AnimatePresence>
           {open && (
             <motion.div
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
-              className="mt-2 overflow-hidden rounded-2xl border border-black/05 bg-white p-4 shadow-card lg:hidden"
+              className="mt-2 overflow-hidden rounded-2xl glass p-4 lg:hidden"
             >
               <nav className="flex flex-col gap-1">
                 {links.map((l) => (
@@ -92,8 +95,8 @@ export function Navbar() {
                     key={l.to}
                     to={l.to}
                     onClick={() => setOpen(false)}
-                    className="rounded-lg px-3 py-2.5 text-base font-medium text-ink/80 transition-colors hover:bg-[#FFF6E5] hover:text-gold"
-                    activeProps={{ className: "text-gold bg-[#FFF6E5]" }}
+                    className="rounded-lg px-3 py-2.5 text-base font-medium text-[#F0E8D8]/80 transition-colors hover:bg-[#E8A628]/10 hover:text-[#F5B800]"
+                    activeProps={{ className: "text-[#F5B800] bg-[#E8A628]/10" }}
                   >
                     {l.label}
                   </Link>
@@ -101,7 +104,7 @@ export function Navbar() {
                 <Link
                   to="/menu"
                   onClick={() => setOpen(false)}
-                  className="mt-2 inline-flex items-center justify-center gap-2 rounded-full bg-gradient-gold px-5 py-3 text-sm font-semibold text-ink shadow-gold"
+                  className="mt-2 inline-flex items-center justify-center gap-2 rounded-full bg-gradient-gold px-5 py-3 text-sm font-semibold text-[#181512] shadow-gold"
                 >
                   <ShoppingBag className="h-4 w-4" /> Order Now
                 </Link>

@@ -30,44 +30,70 @@ const items = [
 function SignaturePage() {
   return (
     <SiteLayout>
-      <section className="mx-auto max-w-7xl px-6 py-12">
-        <SectionHeader eyebrow="Signature" title="The dishes that define us." subtitle="Five icons crafted with obsession — every bite a reason to come back." />
+      {/* Header */}
+      <section className="bg-[#FFF6E5] pt-28 pb-12">
+        <div className="mx-auto max-w-7xl px-6">
+          <SectionHeader
+            eyebrow="Signature"
+            title="The dishes that define us."
+            subtitle="Five icons crafted with obsession — every bite a reason to come back."
+          />
+        </div>
       </section>
 
-      <div className="mx-auto max-w-7xl space-y-32 px-6 pb-20">
-        {items.map((it, i) => (
-          <motion.div
-            key={it.name}
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.7 }}
-            className={`grid items-center gap-10 lg:grid-cols-2 ${i % 2 ? "lg:[direction:rtl]" : ""}`}
-          >
-            <div className="relative [direction:ltr]">
-              <div className="absolute -inset-6 -z-10 rounded-[3rem] opacity-60 blur-3xl" style={{ background: "var(--gradient-radial-glow)" }} />
-              <div className="overflow-hidden rounded-3xl shadow-deep">
-                <img src={it.img} alt={it.name} loading="lazy" className="aspect-square w-full object-cover transition-transform duration-1000 hover:scale-110" />
+      {/* Items */}
+      <section className="bg-white py-16 pb-24">
+        <div className="mx-auto max-w-7xl space-y-28 px-6">
+          {items.map((it, i) => (
+            <motion.div
+              key={it.name}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.7 }}
+              className={`grid items-center gap-10 lg:grid-cols-2 ${i % 2 ? "lg:[direction:rtl]" : ""}`}
+            >
+              {/* Image */}
+              <div className="relative [direction:ltr]">
+                <div
+                  className="absolute -inset-6 -z-10 rounded-[3rem] opacity-40 blur-3xl"
+                  style={{ background: "radial-gradient(circle, rgba(255,195,0,0.35), transparent 70%)" }}
+                />
+                <div className="overflow-hidden rounded-3xl shadow-card">
+                  <img
+                    src={it.img}
+                    alt={it.name}
+                    loading="lazy"
+                    className="aspect-square w-full object-cover transition-transform duration-1000 hover:scale-110"
+                  />
+                </div>
               </div>
-            </div>
-            <div className="[direction:ltr]">
-              <span className="inline-flex items-center gap-2 rounded-full border border-gold/40 bg-gold/5 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.25em] text-gold">
-                <Flame className="h-3 w-3" /> {it.tag}
-              </span>
-              <h3 className="mt-4 font-display text-5xl font-black md:text-6xl">{it.name}</h3>
-              <p className="mt-4 text-lg text-muted-foreground">{it.desc}</p>
-              <div className="mt-6 flex flex-wrap gap-2">
-                {it.ingredients.map((g) => (
-                  <span key={g} className="rounded-full border border-border bg-white/5 px-3 py-1 text-xs font-medium text-foreground/80">{g}</span>
-                ))}
+
+              {/* Text */}
+              <div className="[direction:ltr]">
+                <span className="inline-flex items-center gap-2 rounded-full border border-[#FFC300]/40 bg-[#FFC300]/08 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.25em] text-gold">
+                  <Flame className="h-3 w-3" /> {it.tag}
+                </span>
+                <h3 className="mt-4 font-display text-5xl font-black text-ink md:text-6xl">{it.name}</h3>
+                <p className="mt-4 text-lg text-ink-muted leading-relaxed">{it.desc}</p>
+                <div className="mt-6 flex flex-wrap gap-2">
+                  {it.ingredients.map((g) => (
+                    <span key={g} className="rounded-full border border-[#FFC300]/25 bg-[#FFF6E5] px-3 py-1 text-xs font-medium text-ink/80">
+                      {g}
+                    </span>
+                  ))}
+                </div>
+                <Link
+                  to="/menu"
+                  className="mt-7 inline-flex items-center gap-2 rounded-full bg-gradient-gold px-6 py-3 text-sm font-bold text-ink shadow-gold transition-all hover:scale-105"
+                >
+                  Order this <ArrowRight className="h-4 w-4" />
+                </Link>
               </div>
-              <Link to="/menu" className="mt-7 inline-flex items-center gap-2 rounded-full bg-gradient-gold px-6 py-3 text-sm font-bold text-jet shadow-gold">
-                Order this <ArrowRight className="h-4 w-4" />
-              </Link>
-            </div>
-          </motion.div>
-        ))}
-      </div>
+            </motion.div>
+          ))}
+        </div>
+      </section>
     </SiteLayout>
   );
 }

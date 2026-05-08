@@ -66,20 +66,28 @@ export function Hero() {
         </motion.div>
       </AnimatePresence>
 
-      {/* Warm overlay layers */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/35 to-black/15" />
-      <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/25 to-transparent" />
-      {/* Warm golden tint at bottom */}
-      <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#FFC300]/20 to-transparent" />
+      {/* Dark overlays — like restaurant's moody lighting */}
+      <div className="absolute inset-0 bg-linear-to-t from-[#181512] via-[#181512]/65 to-[#181512]/25" />
+      <div className="absolute inset-0 bg-linear-to-r from-[#181512]/90 via-[#181512]/40 to-transparent" />
 
-      {/* Floating gold sparkles */}
-      {Array.from({ length: 10 }).map((_, k) => (
+      {/* Amber glow orbs — like the restaurant hanging chandeliers */}
+      <div
+        className="pointer-events-none absolute -left-32 top-1/3 h-[480px] w-[480px] rounded-full opacity-40 blur-3xl"
+        style={{ background: "radial-gradient(circle, rgba(232,166,40,0.55), transparent 70%)" }}
+      />
+      <div
+        className="pointer-events-none absolute -right-32 bottom-0 h-[420px] w-[420px] rounded-full opacity-30 blur-3xl"
+        style={{ background: "radial-gradient(circle, rgba(245,184,0,0.45), transparent 70%)" }}
+      />
+
+      {/* Floating gold particles */}
+      {Array.from({ length: 12 }).map((_, k) => (
         <motion.span
           key={k}
-          className="pointer-events-none absolute h-1.5 w-1.5 rounded-full bg-[#FFC300]/70"
-          animate={{ y: ["0%", "-20%", "0%"], opacity: [0, 0.9, 0] }}
-          transition={{ duration: 4 + Math.random() * 4, repeat: Infinity, delay: Math.random() * 4 }}
-          style={{ left: `${10 + Math.random() * 80}%`, top: `${10 + Math.random() * 80}%` }}
+          className="pointer-events-none absolute h-1.5 w-1.5 rounded-full bg-[#F5B800]/70"
+          animate={{ y: ["0%", "-22%", "0%"], opacity: [0, 0.9, 0] }}
+          transition={{ duration: 4 + Math.random() * 4, repeat: Infinity, delay: Math.random() * 5 }}
+          style={{ left: `${8 + Math.random() * 84}%`, top: `${10 + Math.random() * 80}%` }}
         />
       ))}
 
@@ -94,30 +102,30 @@ export function Hero() {
             transition={{ duration: 0.8 }}
             className="max-w-2xl"
           >
-            {/* Eyebrow badge */}
-            <span className="inline-flex items-center gap-2 rounded-full border border-[#FFC300]/60 bg-[#FFC300]/10 px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.3em] text-[#FFC300] backdrop-blur-sm">
-              <span className="h-1.5 w-1.5 rounded-full bg-[#FFC300] pulse-glow" />
+            {/* Eyebrow — amber panel style */}
+            <span className="inline-flex items-center gap-2 rounded-full border border-[#F5B800]/50 bg-[#E8A628]/12 px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.3em] text-[#F5B800] backdrop-blur-sm">
+              <span className="h-1.5 w-1.5 rounded-full bg-[#F5B800] pulse-glow" />
               {s.eyebrow}
             </span>
 
-            <h1 className="mt-5 font-display text-5xl font-black leading-[1.05] tracking-tight text-white md:text-7xl lg:text-8xl">
-              <span className="block drop-shadow-lg">{s.title[0]}</span>
-              <span className="block text-gradient-gold drop-shadow-lg">{s.title[1]}</span>
+            <h1 className="mt-5 font-display text-5xl font-black leading-[1.05] tracking-tight text-[#F0E8D8] md:text-7xl lg:text-8xl drop-shadow-lg">
+              <span className="block">{s.title[0]}</span>
+              <span className="block text-gradient-gold">{s.title[1]}</span>
             </h1>
 
-            <p className="mt-5 max-w-xl text-base text-white/85 md:text-lg drop-shadow-sm">{s.sub}</p>
+            <p className="mt-5 max-w-xl text-base text-[#F0E8D8]/75 md:text-lg">{s.sub}</p>
 
             <div className="mt-8 flex flex-wrap items-center gap-4">
               <Link
                 to={s.cta1.to}
-                className="group inline-flex items-center gap-2 rounded-full bg-gradient-gold px-7 py-3.5 text-sm font-bold text-ink shadow-gold transition-all hover:scale-105 hover:shadow-[0_12px_32px_rgba(255,195,0,0.45)]"
+                className="group inline-flex items-center gap-2 rounded-full bg-gradient-gold px-7 py-3.5 text-sm font-bold text-[#181512] shadow-gold transition-all hover:scale-105 hover:shadow-[0_12px_36px_rgba(245,184,0,0.50)]"
               >
                 {s.cta1.label}
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Link>
               <Link
                 to={s.cta2.to}
-                className="inline-flex items-center gap-2 rounded-full border-2 border-white/40 bg-white/10 px-7 py-3.5 text-sm font-semibold text-white backdrop-blur-sm transition-all hover:border-[#FFC300] hover:bg-[#FFC300]/15 hover:text-[#FFC300]"
+                className="inline-flex items-center gap-2 rounded-full border-2 border-[#F0E8D8]/25 bg-[#181512]/30 px-7 py-3.5 text-sm font-semibold text-[#F0E8D8] backdrop-blur-sm transition-all hover:border-[#F5B800]/60 hover:text-[#F5B800]"
               >
                 <CalendarDays className="h-4 w-4" />
                 {s.cta2.label}
@@ -133,7 +141,7 @@ export function Hero() {
               key={k}
               onClick={() => setI(k)}
               aria-label={`Slide ${k + 1}`}
-              className="relative h-1 w-12 overflow-hidden rounded-full bg-white/25"
+              className="relative h-1 w-12 overflow-hidden rounded-full bg-[#F0E8D8]/20"
             >
               <span
                 className={`absolute inset-y-0 left-0 bg-gradient-gold ${k === i ? "w-full" : "w-0"}`}
@@ -143,16 +151,16 @@ export function Hero() {
           ))}
         </div>
 
-        {/* Stats strip */}
-        <div className="absolute bottom-10 right-6 hidden items-center gap-8 rounded-2xl border border-white/15 bg-black/30 px-6 py-4 backdrop-blur-md md:flex">
+        {/* Stats strip — dark glass like restaurant booth dividers */}
+        <div className="absolute bottom-10 right-6 hidden items-center gap-8 rounded-2xl border border-[#E8A628]/20 bg-[#181512]/70 px-6 py-4 backdrop-blur-md md:flex">
           {[
             ["3", "Branches"],
             ["50+", "Menu Items"],
             ["10K+", "Happy Guests"],
           ].map(([n, l]) => (
             <div key={l} className="text-center">
-              <div className="font-display text-2xl font-black text-[#FFC300]">{n}</div>
-              <div className="text-[10px] uppercase tracking-widest text-white/70">{l}</div>
+              <div className="font-display text-2xl font-black text-[#F5B800]">{n}</div>
+              <div className="text-[10px] uppercase tracking-widest text-[#9E8E78]">{l}</div>
             </div>
           ))}
         </div>

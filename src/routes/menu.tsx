@@ -22,15 +22,14 @@ function MenuPage() {
 
   return (
     <SiteLayout>
-      {/* Page header — white bg */}
-      <section className="bg-white pt-28 pb-12">
+      {/* Header — dark charcoal */}
+      <section className="bg-[#1E1C1A] pt-28 pb-12">
         <div className="mx-auto max-w-7xl px-6">
           <SectionHeader
             eyebrow="The Menu"
             title="Crafted to crave."
             subtitle="From signature burgers to wood-fired pizza, every dish is a moment worth savouring."
           />
-
           {/* Category filter pills */}
           <div className="mx-auto mt-10 flex max-w-full flex-wrap items-center justify-center gap-2">
             {(["All", ...categories] as const).map((c) => (
@@ -39,8 +38,8 @@ function MenuPage() {
                 onClick={() => setActive(c)}
                 className={`whitespace-nowrap rounded-full px-5 py-2 text-xs font-semibold uppercase tracking-wider transition-all ${
                   active === c
-                    ? "bg-gradient-gold text-ink shadow-gold"
-                    : "border border-black/10 bg-[#F2F2F2] text-ink/70 hover:border-[#FFC300]/60 hover:text-gold"
+                    ? "bg-gradient-gold text-[#181512] shadow-gold"
+                    : "border border-[#E8A628]/25 bg-[#2A2520] text-[#F0E8D8]/65 hover:border-[#F5B800]/55 hover:text-[#F5B800]"
                 }`}
               >
                 {c}
@@ -50,8 +49,8 @@ function MenuPage() {
         </div>
       </section>
 
-      {/* Grid — neutral bg */}
-      <section className="bg-[#F8F9FA] py-12 pb-24">
+      {/* Grid — near-black bg */}
+      <section className="bg-[#181512] py-12 pb-24">
         <div className="mx-auto max-w-7xl px-6">
           <motion.div layout className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {items.map((m, i) => <MenuCard key={m.name} item={m} index={i} />)}
