@@ -12,17 +12,17 @@ import appCss from "../styles.css?url";
 
 function NotFoundComponent() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-[#FFFDF7] px-4">
+    <div className="flex min-h-screen items-center justify-center bg-[#181512] px-4">
       <div className="max-w-md text-center">
-        <h1 className="font-display text-7xl font-black text-gold">404</h1>
-        <h2 className="mt-4 text-xl font-semibold text-ink">Page not found</h2>
-        <p className="mt-2 text-sm text-ink-muted">
+        <h1 className="font-display text-7xl font-black text-[#F5B800]">404</h1>
+        <h2 className="mt-4 text-xl font-semibold text-[#F0E8D8]">Page not found</h2>
+        <p className="mt-2 text-sm text-[#9E8E78]">
           The page you're looking for doesn't exist or has been moved.
         </p>
         <div className="mt-6">
           <Link
             to="/"
-            className="inline-flex items-center justify-center rounded-full bg-gradient-gold px-5 py-2.5 text-sm font-semibold text-ink shadow-gold transition-all hover:scale-105"
+            className="inline-flex items-center justify-center rounded-full bg-gradient-gold px-5 py-2.5 text-sm font-semibold text-[#181512] shadow-gold transition-all hover:scale-105"
           >
             Go home
           </Link>
