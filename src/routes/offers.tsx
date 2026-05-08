@@ -28,47 +28,69 @@ const offers = [
 function OffersPage() {
   return (
     <SiteLayout>
-      <section className="mx-auto max-w-7xl px-6 py-12">
-        <SectionHeader eyebrow="Deals & Offers" title="Hot deals, served daily." subtitle="Limited-time combos and weekend specials. Don't miss out." />
+      {/* Header — warm tint */}
+      <section className="bg-[#FFF6E5] pt-28 pb-12">
+        <div className="mx-auto max-w-7xl px-6">
+          <SectionHeader
+            eyebrow="Deals & Offers"
+            title="Hot deals, served daily."
+            subtitle="Limited-time combos and weekend specials. Don't miss out."
+          />
+        </div>
+      </section>
 
-        <div className="mt-12 grid gap-6 md:grid-cols-2">
-          {offers.map((o, i) => (
-            <motion.div
-              key={o.title}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.08 }}
-              className="group relative overflow-hidden rounded-3xl glass-card transition-all hover:-translate-y-1 hover:border-gold/60 hover:shadow-glow"
-            >
-              <div className="grid sm:grid-cols-5">
-                <div className="relative sm:col-span-2">
-                  <img src={o.img} alt={o.title} loading="lazy" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" />
-                  <div className="absolute inset-0 bg-gradient-to-r from-jet/40 to-transparent" />
-                  <span className="absolute left-3 top-3 rounded-full bg-accent px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-jet">
-                    <Flame className="mr-1 inline h-3 w-3" /> {o.badge}
-                  </span>
+      {/* Cards — white bg */}
+      <section className="bg-white py-16 pb-24">
+        <div className="mx-auto max-w-7xl px-6">
+          <div className="grid gap-6 md:grid-cols-2">
+            {offers.map((o, i) => (
+              <motion.div
+                key={o.title}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.08 }}
+                className="group relative overflow-hidden rounded-3xl bg-white border border-black/06 shadow-card transition-all hover:-translate-y-1 hover:border-[#FFC300]/35 hover:shadow-card-hover"
+              >
+                {/* Gold top accent on hover */}
+                <div className="absolute inset-x-0 top-0 h-1 origin-left scale-x-0 bg-gradient-gold rounded-t-3xl transition-transform duration-500 group-hover:scale-x-100" />
+                <div className="grid sm:grid-cols-5">
+                  <div className="relative sm:col-span-2 overflow-hidden">
+                    <img
+                      src={o.img}
+                      alt={o.title}
+                      loading="lazy"
+                      className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-linear-to-r from-black/30 to-transparent" />
+                    <span className="absolute left-3 top-3 inline-flex items-center gap-1 rounded-full bg-gradient-gold px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-ink shadow-gold">
+                      <Flame className="h-3 w-3" /> {o.badge}
+                    </span>
+                  </div>
+                  <div className="p-6 sm:col-span-3">
+                    <div className="flex items-center gap-2 text-[11px] uppercase tracking-widest text-gold font-semibold">
+                      <Tag className="h-3 w-3" /> {o.off}
+                    </div>
+                    <h3 className="mt-2 font-display text-2xl font-black text-ink md:text-3xl">{o.title}</h3>
+                    <p className="mt-2 text-sm text-ink-muted leading-relaxed">{o.desc}</p>
+                    <div className="mt-4 flex items-baseline gap-2">
+                      <span className="font-display text-3xl font-black text-gold">৳{o.price}</span>
+                      <span className="text-sm text-ink-muted line-through">৳{o.was}</span>
+                    </div>
+                    <div className="mt-3 flex items-center gap-2 text-xs text-ink-muted">
+                      <Clock className="h-3.5 w-3.5 text-gold" /> Limited time only
+                    </div>
+                    <Link
+                      to="/menu"
+                      className="mt-5 inline-flex items-center gap-2 rounded-full bg-gradient-gold px-5 py-2.5 text-sm font-bold text-ink shadow-gold transition-all hover:scale-105"
+                    >
+                      Grab This Deal <ArrowRight className="h-4 w-4" />
+                    </Link>
+                  </div>
                 </div>
-                <div className="p-6 sm:col-span-3">
-                  <div className="flex items-center gap-2 text-[11px] uppercase tracking-widest text-gold">
-                    <Tag className="h-3 w-3" /> {o.off}
-                  </div>
-                  <h3 className="mt-2 font-display text-2xl font-black md:text-3xl">{o.title}</h3>
-                  <p className="mt-2 text-sm text-muted-foreground">{o.desc}</p>
-                  <div className="mt-4 flex items-baseline gap-2">
-                    <span className="font-display text-3xl font-black text-gold">৳{o.price}</span>
-                    <span className="text-sm text-muted-foreground line-through">৳{o.was}</span>
-                  </div>
-                  <div className="mt-5 flex items-center gap-2 text-xs text-muted-foreground">
-                    <Clock className="h-3.5 w-3.5 text-gold" /> Limited time only
-                  </div>
-                  <Link to="/menu" className="mt-5 inline-flex items-center gap-2 rounded-full bg-gradient-gold px-5 py-2.5 text-sm font-bold text-jet shadow-gold">
-                    Grab This Deal <ArrowRight className="h-4 w-4" />
-                  </Link>
-                </div>
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
     </SiteLayout>

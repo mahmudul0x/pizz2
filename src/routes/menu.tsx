@@ -22,31 +22,41 @@ function MenuPage() {
 
   return (
     <SiteLayout>
-      <section className="relative mx-auto max-w-7xl px-6 py-12">
-        <SectionHeader eyebrow="The Menu" title="Crafted to crave." subtitle="From signature burgers to wood-fired pizza, every dish is a moment worth savouring." />
+      {/* Page header — white bg */}
+      <section className="bg-white pt-28 pb-12">
+        <div className="mx-auto max-w-7xl px-6">
+          <SectionHeader
+            eyebrow="The Menu"
+            title="Crafted to crave."
+            subtitle="From signature burgers to wood-fired pizza, every dish is a moment worth savouring."
+          />
 
-        <div className="mx-auto mt-10 flex max-w-full flex-wrap items-center justify-center gap-2 overflow-x-auto">
-          {(["All", ...categories] as const).map((c) => (
-            <button
-              key={c}
-              onClick={() => setActive(c)}
-              className={`whitespace-nowrap rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-wider transition ${
-                active === c
-                  ? "bg-gradient-gold text-jet shadow-gold"
-                  : "border border-border bg-white/5 text-foreground/80 hover:border-gold/60 hover:text-gold"
-              }`}
-            >
-              {c}
-            </button>
-          ))}
+          {/* Category filter pills */}
+          <div className="mx-auto mt-10 flex max-w-full flex-wrap items-center justify-center gap-2">
+            {(["All", ...categories] as const).map((c) => (
+              <button
+                key={c}
+                onClick={() => setActive(c)}
+                className={`whitespace-nowrap rounded-full px-5 py-2 text-xs font-semibold uppercase tracking-wider transition-all ${
+                  active === c
+                    ? "bg-gradient-gold text-ink shadow-gold"
+                    : "border border-black/10 bg-[#F2F2F2] text-ink/70 hover:border-[#FFC300]/60 hover:text-gold"
+                }`}
+              >
+                {c}
+              </button>
+            ))}
+          </div>
         </div>
+      </section>
 
-        <motion.div
-          layout
-          className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
-        >
-          {items.map((m, i) => <MenuCard key={m.name} item={m} index={i} />)}
-        </motion.div>
+      {/* Grid — neutral bg */}
+      <section className="bg-[#F8F9FA] py-12 pb-24">
+        <div className="mx-auto max-w-7xl px-6">
+          <motion.div layout className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            {items.map((m, i) => <MenuCard key={m.name} item={m} index={i} />)}
+          </motion.div>
+        </div>
       </section>
     </SiteLayout>
   );

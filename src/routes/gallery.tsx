@@ -60,44 +60,66 @@ function GalleryPage() {
 
   return (
     <SiteLayout>
-      <section className="mx-auto max-w-7xl px-6 py-12">
-        <SectionHeader eyebrow="Gallery" title="A feast for the eyes." subtitle="Cinematic moments captured in golden light." />
+      {/* Header — neutral bg */}
+      <section className="bg-[#F8F9FA] pt-28 pb-12">
+        <div className="mx-auto max-w-7xl px-6">
+          <SectionHeader eyebrow="Gallery" title="A feast for the eyes." subtitle="Cinematic moments captured in golden light." />
 
-        <div className="mt-10 flex flex-wrap justify-center gap-2">
-          {cats.map((c) => (
-            <button
-              key={c}
-              onClick={() => setActive(c)}
-              className={`rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-wider transition ${
-                active === c ? "bg-gradient-gold text-jet shadow-gold" : "border border-border bg-white/5 hover:border-gold/60 hover:text-gold"
-              }`}
-            >
-              {c}
-            </button>
-          ))}
-        </div>
-
-        <div className="mt-10 columns-1 gap-4 sm:columns-2 lg:columns-3 xl:columns-4">
-          {filtered.map((p, i) => (
-            <motion.button
-              key={p.src + i}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: (i % 8) * 0.05 }}
-              onClick={() => setOpen(p.src)}
-              className="group relative mb-4 block w-full overflow-hidden rounded-2xl border border-border/60 bg-card"
-            >
-              <img src={p.src} alt="" loading="lazy" className="w-full transition-transform duration-700 group-hover:scale-110" />
-              <div className="absolute inset-0 bg-gradient-to-t from-jet/60 via-transparent to-transparent opacity-50 transition-opacity group-hover:opacity-0" />
-            </motion.button>
-          ))}
+          <div className="mt-10 flex flex-wrap justify-center gap-2">
+            {cats.map((c) => (
+              <button
+                key={c}
+                onClick={() => setActive(c)}
+                className={`rounded-full px-5 py-2 text-xs font-semibold uppercase tracking-wider transition-all ${
+                  active === c
+                    ? "bg-gradient-gold text-ink shadow-gold"
+                    : "border border-black/10 bg-white text-ink/70 hover:border-[#FFC300]/60 hover:text-gold"
+                }`}
+              >
+                {c}
+              </button>
+            ))}
+          </div>
         </div>
       </section>
 
+      {/* Masonry grid — white bg */}
+      <section className="bg-white py-12 pb-24">
+        <div className="mx-auto max-w-7xl px-6">
+          <div className="columns-1 gap-4 sm:columns-2 lg:columns-3 xl:columns-4">
+            {filtered.map((p, i) => (
+              <motion.button
+                key={p.src + i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: (i % 8) * 0.05 }}
+                onClick={() => setOpen(p.src)}
+                className="group relative mb-4 block w-full overflow-hidden rounded-2xl border border-black/06 bg-[#F2F2F2] shadow-card"
+              >
+                <img
+                  src={p.src}
+                  alt=""
+                  loading="lazy"
+                  className="w-full transition-transform duration-700 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-linear-to-t from-black/50 via-transparent to-transparent opacity-40 transition-opacity group-hover:opacity-0" />
+              </motion.button>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Lightbox */}
       {open && (
-        <div onClick={() => setOpen(null)} className="fixed inset-0 z-[60] grid place-items-center bg-jet/95 p-6 backdrop-blur">
-          <button className="absolute right-6 top-6 grid h-11 w-11 place-items-center rounded-full glass">
+        <div
+          onClick={() => setOpen(null)}
+          className="fixed inset-0 z-60 grid place-items-center bg-black/92 p-6 backdrop-blur-sm"
+        >
+          <button
+            className="absolute right-6 top-6 grid h-11 w-11 place-items-center rounded-full bg-white/10 border border-white/20 text-white transition-colors hover:bg-white/20"
+            onClick={() => setOpen(null)}
+          >
             <X className="h-5 w-5" />
           </button>
           <motion.img
@@ -105,7 +127,7 @@ function GalleryPage() {
             animate={{ opacity: 1, scale: 1 }}
             src={open}
             alt=""
-            className="max-h-[85vh] max-w-full rounded-2xl object-contain shadow-deep"
+            className="max-h-[85vh] max-w-full rounded-2xl object-contain shadow-[0_30px_80px_rgba(0,0,0,0.6)]"
           />
         </div>
       )}
