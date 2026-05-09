@@ -27,7 +27,7 @@ export function BranchSelector() {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0, scale: 0.97 }}
           transition={{ duration: 0.4 }}
-          className="fixed inset-0 z-[200] flex flex-col items-center justify-center bg-[#181512] px-4 py-12 overflow-hidden"
+          className="fixed inset-0 z-[200] overflow-y-auto bg-[#181512]"
         >
           {/* Ambient glows */}
           <div className="pointer-events-none fixed left-[-10%] top-[-10%] h-[40vw] w-[40vw] rounded-full opacity-20 blur-[100px]"
@@ -35,7 +35,8 @@ export function BranchSelector() {
           <div className="pointer-events-none fixed bottom-[-10%] right-[-10%] h-[40vw] w-[40vw] rounded-full opacity-15 blur-[120px]"
             style={{ background: "radial-gradient(circle, #E8A628, transparent 70%)" }} />
 
-          <div className="relative z-10 w-full max-w-5xl">
+          <div className="relative z-10 flex min-h-full flex-col items-center justify-center px-4 py-12">
+          <div className="w-full max-w-5xl">
             {/* Logo + headline */}
             <motion.div
               initial={{ opacity: 0, y: -20 }}
@@ -78,6 +79,7 @@ export function BranchSelector() {
             >
               You can change your branch at any time from the navigation bar.
             </motion.p>
+          </div>
           </div>
         </motion.div>
       )}
