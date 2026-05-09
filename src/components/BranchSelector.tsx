@@ -1,11 +1,22 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { MapPin, Clock, Phone, ArrowRight } from "lucide-react";
+import { useEffect } from "react";
 import { branches } from "@/data/menu";
 import { useBranch, type Branch } from "@/context/BranchContext";
 import { Logo } from "./Logo";
 
 export function BranchSelector() {
   const { selected, select } = useBranch();
+
+  // Lock body scroll while the selector is visible
+  useEffect(() => {
+    if (!selected) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => { document.body.style.overflow = ""; };
+  }, [selected]);
 
   return (
     <AnimatePresence>
@@ -16,7 +27,7 @@ export function BranchSelector() {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0, scale: 0.97 }}
           transition={{ duration: 0.4 }}
-          className="fixed inset-0 z-[200] flex flex-col items-center justify-center overflow-y-auto bg-[#181512] px-4 py-12"
+          className="fixed inset-0 z-[200] flex flex-col items-center justify-center bg-[#181512] px-4 py-12 overflow-hidden"
         >
           {/* Ambient glows */}
           <div className="pointer-events-none fixed left-[-10%] top-[-10%] h-[40vw] w-[40vw] rounded-full opacity-20 blur-[100px]"
