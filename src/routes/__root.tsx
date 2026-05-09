@@ -9,6 +9,8 @@ import {
 } from "@tanstack/react-router";
 
 import appCss from "../styles.css?url";
+import { BranchProvider } from "@/context/BranchContext";
+import { BranchSelector } from "@/components/BranchSelector";
 
 function NotFoundComponent() {
   return (
@@ -114,7 +116,10 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Outlet />
+      <BranchProvider>
+        <BranchSelector />
+        <Outlet />
+      </BranchProvider>
     </QueryClientProvider>
   );
 }

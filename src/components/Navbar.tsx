@@ -1,8 +1,9 @@
 import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { Menu, X, ShoppingBag } from "lucide-react";
+import { Menu, X, ShoppingBag, MapPin, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Logo } from "./Logo";
+import { useBranch } from "@/context/BranchContext";
 
 const links = [
   { to: "/", label: "Home" },
@@ -18,6 +19,7 @@ const links = [
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const { selected, reset } = useBranch();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -58,7 +60,18 @@ export function Navbar() {
             ))}
           </nav>
 
-          <div className="hidden lg:block">
+          <div className="hidden lg:flex items-center gap-3">
+            {selected && (
+              <button
+                onClick={reset}
+                className="inline-flex items-center gap-1.5 rounded-full border border-[#E8A628]/30 bg-[#2A2520] px-3.5 py-2 text-xs font-semibold text-[#F5B800] transition-all hover:border-[#F5B800]/60 hover:bg-[#2A2520]"
+                title="Change branch"
+              >
+                <MapPin className="h-3.5 w-3.5" />
+                {selected.city}
+                <ChevronDown className="h-3 w-3 opacity-60" />
+              </button>
+            )}
             <Link
               to="/menu"
               className="group inline-flex items-center gap-2 rounded-full bg-gradient-gold px-5 py-2.5 text-sm font-semibold text-[#181512] shadow-gold transition-all hover:scale-105 hover:shadow-[0_8px_28px_rgba(245,184,0,0.5)]"
@@ -90,6 +103,16 @@ export function Navbar() {
               className="mt-2 overflow-hidden rounded-2xl glass p-4 lg:hidden"
             >
               <nav className="flex flex-col gap-1">
+                {selected && (
+                  <button
+                    onClick={() => { reset(); setOpen(false); }}
+                    className="mb-1 flex items-center gap-2 rounded-lg border border-[#E8A628]/25 bg-[#E8A628]/10 px-3 py-2.5 text-sm font-semibold text-[#F5B800]"
+                  >
+                    <MapPin className="h-4 w-4" />
+                    {selected.city} Branch
+                    <span className="ml-auto text-xs font-normal text-[#9E8E78]">Change</span>
+                  </button>
+                )}
                 {links.map((l) => (
                   <Link
                     key={l.to}
