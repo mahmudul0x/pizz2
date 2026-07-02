@@ -6,21 +6,22 @@ import { useBranch, type Branch } from "@/context/BranchContext";
 import { Logo } from "./Logo";
 
 export function BranchSelector() {
-  const { selected, select } = useBranch();
+  const { selected, hydrated, select } = useBranch();
+  const show = hydrated && !selected;
 
   // Lock body scroll while the selector is visible
   useEffect(() => {
-    if (!selected) {
+    if (show) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "";
     }
     return () => { document.body.style.overflow = ""; };
-  }, [selected]);
+  }, [show]);
 
   return (
     <AnimatePresence>
-      {!selected && (
+      {show && (
         <motion.div
           key="branch-selector"
           initial={{ opacity: 0 }}
